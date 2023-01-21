@@ -18,10 +18,10 @@ class Pet():
         self.rings = randint(0, 100)
         
         # mastery attributes
-        self.fly = 0
-        self.power = 0
+        self.flight = 0
         self.speed = 0
-        self.swim = 0
+        self.strength = 0
+        self.swimming = 0
 
         # nature attributes
         self.intelligence = 0
@@ -30,6 +30,60 @@ class Pet():
 
         # speech
         self.word = self.make_word()
+    
+    def check_stats(self, stat):
+        """
+        """
+
+        name = self.get_name()
+
+        stats = [
+            "a", "b", "h", "ma", "mo", "nam", "nat", "r", "t", "w"
+        ]
+
+        if stat == "a":
+            age = self.get_age()
+            self.increase_age()
+            self.determine_age(age)
+        
+        elif stat == "b":
+            belly = self.get_belly()
+            print(f"{name} seems to be {belly}")
+        
+        elif stat == "h":
+            print("[a]ge, [b]elly, [ma]stery, [mo]od, [nam]e, [nat]ure, [r]ings, [t]houghts, or [w]hat")
+        
+        elif stat == "ma":
+            fly, power, run, swim = self.get_mastery()
+            print(f"{name} can fly (level {fly}), lift (level {power}), run (level {run}), & swim (level {swim})")
+        
+        elif stat == "mo":
+            mood = self.get_mood()
+            self.determine_mood(mood)
+        
+        elif stat == "nam":
+            print(f"it's name is {name}")
+
+        elif stat == "nat":
+            intelligence, luck, stamina = self.get_nature()
+            print(f"{name} is intelligent (level {intelligence}), lucky (level {luck}), & enduring (level {stamina})")
+        
+        elif stat == "r":
+            rings = self.get_rings()
+            print(f"{name} has {rings} rings")
+        
+        elif stat == "t":
+            word = self.get_word()
+            print(f"{name} says {word}")
+
+        elif stat == "w":
+            print(f"{name} is a cephalopod...reptile...thing...")
+        
+        elif stat not in stats:
+            print("that's not an stat that can be checked")
+
+        else:
+            print("def check_stats error")
     
     def determine_age(self, age):
         """
@@ -45,7 +99,7 @@ class Pet():
             print(f"{self.name} is 2 years old")
 
         else:
-            print("error")
+            print("def determine_age error")
     
     def determine_mood(self, mood):
         """
@@ -60,8 +114,11 @@ class Pet():
         elif 6 < mood < 10:
             print(f"{self.name} seems happy")
 
-        else:
+        elif mood >= 10:
             print(f"{self.name} seems excited")
+
+        else:
+            print("def determine_mood error")
     
     def feed_food(self, food):
         """
@@ -106,7 +163,7 @@ class Pet():
         """
         """
 
-        return self.fly, self.power, self.speed, self.swim
+        return self.flight, self.strength, self.speed, self.swim
     
     def get_mood(self):
         """
@@ -174,10 +231,10 @@ class Pet():
         """
         """
 
-        self.fly = 0
-        self.power = 0
+        self.flight = 0
+        self.strength = 0
         self.speed = 0
-        self.swim = 0
+        self.swimming = 0
     
     def set_mood(self):
         """
@@ -212,52 +269,47 @@ class Pet():
 
         self.word = self.make_word()
     
-    def check_stats(self, stat):
+    def track_stats(self):
         """
         """
 
-        name = self.get_name()
+        stat_list = [
+            self.flight,
+            self.intelligence,
+            self.luck,
+            self.speed,
+            self.stamina,
+            self.strength,
+            self.swimming
+        ]
 
-        if stat == "a":
-            age = self.get_age()
-            self.increase_age()
-            self.determine_age(age)
-        
-        elif stat == "b":
-            belly = self.get_belly()
-            print(f"{name} seems to be {belly}")
-        
-        elif stat == "h":
-            print("[a]ge, [b]elly, [ma]stery, [mo]od, [nam]e, [nat]ure, [r]ings, [t]houghts, or [w]hat")
-        
-        elif stat == "ma":
-            fly, power, run, swim = self.get_mastery()
-            print(f"{name} can fly (level {fly}), lift (level {power}), run (level {run}), & swim (level {swim})")
-        
-        elif stat == "mo":
-            mood = self.get_mood()
-            self.determine_mood(mood)
-        
-        elif stat == "nam":
-            print(f"it's name is {name}")
+        for stat in stat_list:
 
-        elif stat == "nat":
-            intelligence, luck, stamina = self.get_nature()
-            print(f"{name} is intelligent (level {intelligence}), lucky (level {luck}), & enduring (level {stamina})")
-        
-        elif stat == "r":
-            rings = self.get_rings()
-            print(f"{name} has {rings} rings")
-        
-        elif stat == "t":
-            word = self.get_word()
-            print(f"{name} says {word}")
+            if stat >= 100:
 
-        elif stat == "w":
-            print(f"{name} is a cephalopod...reptile...thing...")
-        
-        else:
-            print("that's not an stat that can be checked")
+                if stat == self.fight:
+                    print("flight level increased!")
+
+                elif stat == self.intelligence:
+                    print("intellifence level increased!")
+
+                elif stat == self.luck:
+                    print("luck level increased!")
+
+                elif stat == self.speed:
+                    print("speed level increased!")
+
+                elif stat == self.stamina:
+                    print("stamina level increased!")
+
+                elif stat == self.strength:
+                    print("strength level increased!")
+
+                elif stat == self.swimming:
+                    print("swimming level increased!")
+
+                else:
+                    print("def track_stat error")
     
     def run(self):
         """
@@ -265,6 +317,10 @@ class Pet():
 
         while True:
             choice = input("what would you like to do? type o for options > ")
+
+            choices = [
+                "feed", "o", "stats", "sleep"
+            ]
 
             if choice == "feed":
                 food = input("what would you like to feed it? type o for options > ")
@@ -281,8 +337,11 @@ class Pet():
                 print(f"{self.name} fell asleep")
                 exit()
 
-            else:
+            elif choice not in choices:
                 print("you can't do that")
+
+            else:
+                print("def run error")
 
 if __name__ == "__main__":
     pet = Pet()
