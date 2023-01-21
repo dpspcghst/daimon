@@ -68,12 +68,27 @@ class Pet():
         """
 
         if food == "o":
-            print("list of food goes here")
+            print("avocado, banana, eggplant, strawberry")
 
-        elif food == "pistachios":
+        elif food == "avocado":
             self.mood += 1
             self.speed += 24
             print(f"mood is now {self.mood}, speed is now {self.speed}")
+
+        elif food == "banana":
+            self.mood += 1
+            self.swimming += 24
+            print(f"mood is now {self.mood}, swimming is now {self.swimming}")
+        
+        elif food == "eggplant":
+            self.mood += 1
+            self.flight += 24
+            print(f"mood is now {self.mood}, flight is now {self.flight}")
+
+        elif food == "strawberry":
+            self.mood += 1
+            self.strength += 24
+            print(f"mood is now {self.mood}, strength is now {self.strength}")
     
     def get_age(self):
         """
