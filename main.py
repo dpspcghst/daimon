@@ -30,6 +30,9 @@ class Pet():
 
         # speech
         self.word = self.make_word()
+
+        # acquired habit
+        self.habit = " "
     
     def check_stats(self, stat):
         """
@@ -124,28 +127,87 @@ class Pet():
         """
         """
 
+        foods = [
+            "avocado", "banana", "black olive", "eggplant", "kiwi",
+            "red cherries", "strawberry"
+        ]
+
         if food == "o":
-            print("avocado, banana, eggplant, strawberry")
+            print(foods)
 
         elif food == "avocado":
+            # food1 in settings.py
             self.mood += 1
             self.speed += 24
             print(f"mood is now {self.mood}, speed is now {self.speed}")
 
         elif food == "banana":
+            # food4 in settings.py
             self.mood += 1
             self.swimming += 24
             print(f"mood is now {self.mood}, swimming is now {self.swimming}")
         
+        elif food == "black olive":
+            # food5 in settings.py
+            self.intelligence += 20
+            self.flight += 40
+            self.luck += 20
+            self.speed += 8
+            self.strength += 8
+            self.swimming += 8
+            print(f"{self.name} is feeling spooky...")
+            print(f"intelligence is now {self.intelligence}")
+            print(f"flight is now {self.flight}, luck is now {self.luck}")
+            print(f"speed is now {self.speed}, strenght is now {self.strength}")
+            print(f"swimming is now {self.swimming}")
+        
         elif food == "eggplant":
+            # food2 in settings.py
             self.mood += 1
             self.flight += 24
             print(f"mood is now {self.mood}, flight is now {self.flight}")
 
+        elif food == "kiwi":
+            # food7 in setings.py
+            self.intelligence += 20
+            self.flight -= 12
+            self.luck += 20
+            self.speed += 32
+            self.strength += 16
+            self.swimming -= 4
+            print(f"{self.name} is feeling quick, and started running around")
+            self.habit = "running around"
+            print(f"intelligence is now {self.intelligence}")
+            print(f"flight is now {self.flight}, luck is now {self.luck}")
+            print(f"speed is now {self.speed}, strenght is now {self.strength}")
+            print(f"swimming is now {self.swimming}")
+        
+        elif food == "red cherrires":
+            # food6 in settings.py
+            self.intelligence += 20
+            self.flight -= 16
+            self.luck += 20
+            self.speed += 4
+            self.strength += 36
+            self.swimming += 8
+            print(f"{self.name} is feeling strong, and started roaring")
+            self.habit = "roaring"
+            print(f"intelligence is now {self.intelligence}")
+            print(f"flight is now {self.flight}, luck is now {self.luck}")
+            print(f"speed is now {self.speed}, strenght is now {self.strength}")
+            print(f"swimming is now {self.swimming}")
+        
         elif food == "strawberry":
+            # food3 in settings.py
             self.mood += 1
             self.strength += 24
             print(f"mood is now {self.mood}, strength is now {self.strength}")
+
+        elif food not in foods:
+            print(f"that can't be fed to {self.name}")
+
+        else:
+            print("def feed_food error")
     
     def get_age(self):
         """
