@@ -1,6 +1,113 @@
+#v0.0.12
+
 from random import choice, randint, sample
 from sys import exit
 # import pygame
+import settings as set
+
+citron_growth = {
+    "planted": 0,
+    "sprouted": 18,
+    "taller": 36,
+    "flowering": 54,
+    "berries": 72
+}
+
+default_name = {
+    "egg": "amorpho egg",
+    "baby": "ghastly",
+    "adult": "ghost",
+    "complete": "doppelganger"
+}
+
+egg_hatch_wait = randint(5140, 5396)
+
+food = [
+    "citron" # kasib berry
+]
+
+identity = [
+    "clever",
+    "skillful",
+    "smart"
+]
+
+items = [
+    "ghost gem",
+    "spell tag",
+    "spooky plate"
+]
+
+moves = {
+    "physical": {
+        "name": "phantom force", "power": 90, "accuracy": 100, "moves": 16},
+    "special": {
+        "name": "shadow ball", "power": 80, "accuracy": 100, "moves": 24},
+    "status": {
+        "name": "confuse ray", "power": 0, "accuracy": 0, "moves": 16}
+}
+
+pets = [ # pets, although these features might be incorporated in another way
+    "bat",
+    "half fish",
+    "skeleton dog"
+]
+
+stats = { # conditional on the stage of the demon / soul / spirit
+    "attack": 0,
+    "defense": 0,
+    "hp": 0,
+    "special attack": 0,
+    "special defense": 0,
+    "speed": 0
+}
+
+food = {
+    "food1": {"mood": +1, "speed": +24}, # green
+    "food2": {"mood": +1, "flight": +24}, # purple
+    "food3": {"mood": +1, "strength": +24}, # red
+    "food4": {"mood": +1, "swimming": +24}, # yellow
+    "food5": {
+        "intelligence": +20, "flight": +40, "luck": +20, "speed": +8,
+        "strength": +8, "swimming": +8
+    }, # bat / black / ghost
+    "food6": {
+        "intelligence": +20, "flight": -16, "luck": +20, "speed": +4,
+        "strength": +36, "swimming": +8
+    }, # bear / power / red / roaring
+    "food7": {
+        "intelligence": +20, "flight": -12, "luck": +20, "speed": +32,
+        "strength": +16, "swimming": -4
+    }, # boar / dashing / green / run
+    "food8": {
+        "intelligence": +20, "flight": -8, "luck": +20, "speed": +40,
+        "strength": +8, "swimming": -8
+    }, # cheetah / face washing / green / run
+    "food9": {
+        "intelligence": +20, "flight": +60, "luck": +20, "speed": -24,
+        "strength": +16, "swimming": +20
+    }, # condor / flapping wings / fly / purple
+    "food10": {
+        "intelligence": +20, "flight": -12, "luck": +20, "speed": +32,
+        "strength": +16, "swimming": -4
+    }, # deer / drawing / green / run
+    "food11": {
+        "intelligence": +20, "flight": +4, "luck": +20, "speed": +8,
+        "strength": +32, "swimming": +20
+    }, # breathing fire / dragon / gold / legendary
+    "food12": {
+        "intelligence": +20, "flight": -16, "luck": +20, "speed": +20,
+        "strength": +36, "swimming": -8
+    }, # elephant / performing sit-ups / power / red
+    "food13": {
+        "intelligence": +20, "flight": -12, "luck": +20, "speed": +32,
+        "strength": +16, "swimming": -4
+    }, # gorilla / pounding chest / power / red
+    "food14": {
+        "intelligence": +20, "flight": 0, "luck": +20, "speed": +8,
+        "strength": +24, "swimming": +32
+    } # black / ghost / half fish
+}
 
 class Pet():
     """
@@ -33,6 +140,9 @@ class Pet():
 
         # acquired habit
         self.habit = " "
+
+        # v0.0.12
+        self.ability = choice(set.ABILITIES)
     
     def check_stats(self, stat):
         """
@@ -41,10 +151,14 @@ class Pet():
         name = self.get_name()
 
         stats = [
-            "a", "b", "h", "ma", "mo", "nam", "nat", "r", "t", "w"
+            "ab", "ag", "b", "ma", "mo", "nam", "nat", "o", "r", "t", "w"
         ]
 
-        if stat == "a":
+        if stat == "ab":
+            ability = self.get_ability()
+            print(f"{name} has the {ability} ability")
+
+        elif stat == "ag":
             age = self.get_age()
             self.increase_age()
             self.determine_age(age)
@@ -52,9 +166,6 @@ class Pet():
         elif stat == "b":
             belly = self.get_belly()
             print(f"{name} seems to be {belly}")
-        
-        elif stat == "h":
-            print("[a]ge, [b]elly, [ma]stery, [mo]od, [nam]e, [nat]ure, [r]ings, [t]houghts, or [w]hat")
         
         elif stat == "ma":
             fly, power, run, swim = self.get_mastery()
@@ -70,6 +181,10 @@ class Pet():
         elif stat == "nat":
             intelligence, luck, stamina = self.get_nature()
             print(f"{name} is intelligent (level {intelligence}), lucky (level {luck}), & enduring (level {stamina})")
+        
+        elif stat == "o":
+            print("[ab]ility, [ag]e, [b]elly, [ma]stery, [mo]od, [nam]e")
+            print("[nat]ure, [r]ings, [t]houghts, or [w]hat")
         
         elif stat == "r":
             rings = self.get_rings()
@@ -208,6 +323,12 @@ class Pet():
 
         else:
             print("def feed_food error")
+    
+    def get_ability(self):
+        """
+        """
+
+        return self.ability
     
     def get_age(self):
         """
